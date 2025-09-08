@@ -1,0 +1,2 @@
+# SchoolGradingSystem
+This is a java project where you are able to input the name and unique id of a student including their given grade and then it would print out the names based on the grading. This project is a practice project to sharpen my skills, I struggle to understand the concept of enhanced for loops and creating a list of objects of a custom class so this project is helping me understand those concepts.
