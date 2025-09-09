@@ -13,6 +13,7 @@ public class Main {
                 System.out.println(":::Welcome to Grade Ranker:::\n" +
                         "Type “Enter” to enter a student into the system\n" +
                         "Type “Display” to display the ranking\n" +
+                        "Type “Get Student” to get a students information\n" +
                         "Type “Exit” to end the season");
         String input = in.readLine();
         if (input.equalsIgnoreCase("exit")){
@@ -25,6 +26,9 @@ public class Main {
         if (input.equalsIgnoreCase("display")){
             displayStudent(studentInformations);
         }
+        if (!input.equalsIgnoreCase("display")||!input.equalsIgnoreCase("exit")||!input.equalsIgnoreCase("enter")){
+            System.out.println("Command invalid\n" + "Please enter a valid command");
+        }
 
         }
 
@@ -34,9 +38,21 @@ public class Main {
         String lastname = getLastName(in);
         int ID = getID(in);
         String grade = getGrade(in);
-        studentInformations.add(new StudentInformation(firstname,lastname,ID,grade));
+        int CheckedID = checkDuplicates(studentInformations, in, ID);
+        studentInformations.add(new StudentInformation(firstname,lastname,CheckedID,grade));
         System.out.println("Student Added");
 
+    }
+    public static int checkDuplicates(ArrayList<StudentInformation> students, BufferedReader in, int ID) throws IOException {
+        for (StudentInformation studentInformation : students){
+            if(studentInformation.getID() == ID){
+                System.out.println("Invalid ID");
+                int newID = getID(in);
+                return newID;
+            }
+
+        }
+        return ID;
     }
     public static String getFirstName(BufferedReader in) throws IOException {
         System.out.println("Enter the students first name: ");
@@ -55,11 +71,17 @@ public class Main {
     }
 
     public static int getID(BufferedReader in) throws IOException {
-        System.out.println("Enter the students ID name: ");
+        try {
+            System.out.println("Enter the students ID name: ");
         String input = in.readLine();
-        int ID = Integer.parseInt(input);
-        System.out.println(ID);
-        return ID;
+        int ID;
+         ID  = Integer.parseInt(input);
+            System.out.println(ID);
+            return ID;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid Student ID");
+            throw new RuntimeException(e);
+        }
     }
 
     public static String getGrade(BufferedReader in) throws IOException {
