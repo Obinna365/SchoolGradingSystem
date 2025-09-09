@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -50,7 +49,6 @@ public class Main {
                 int newID = getID(in);
                 return newID;
             }
-
         }
         return ID;
     }
@@ -86,14 +84,30 @@ public class Main {
 
     public static String getGrade(BufferedReader in) throws IOException {
         System.out.println("Enter the students grade: ");
-        String input = in.readLine();
-        String grade = input;
+        String grade = gradeValidator(in);
         System.out.println(grade);
         return grade;
     }
+    public static String gradeValidator(BufferedReader in) throws IOException {
+        String input = in.readLine();
+        while (true){
+        if (input.equalsIgnoreCase("a+")|| input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") ||!input.equalsIgnoreCase("c") || input.equalsIgnoreCase("fail")){
+            return input;} else {
+            System.out.println("Please enter a valid grade:\n" +
+                    "A+ = highest grade\n" +
+                    "A \n" +
+                    "B\n" +
+                    "C\n" +
+                    "Fail = Lowest");
+
+        }
+        }
+
+
+    }
 
     public static void displayStudent(ArrayList<StudentInformation> listofstudents){
-        String[] grader = {"A+","A","B","C"};
+        String[] grader = {"A+","A","B","C","Fail"};
         for (String grade : grader){
         for (StudentInformation student: listofstudents){
             if(student.getGrade().equalsIgnoreCase(grade)){
