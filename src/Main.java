@@ -25,6 +25,9 @@ public class Main {
         if (input.equalsIgnoreCase("display")){
             displayStudent(studentInformations);
         }
+        if (input.equalsIgnoreCase("get student")){
+            getStudent(studentInformations,in);
+        }
         if (!input.equalsIgnoreCase("display")||!input.equalsIgnoreCase("exit")||!input.equalsIgnoreCase("enter")){
             System.out.println("Command invalid\n" + "Please enter a valid command");
         }
@@ -119,6 +122,21 @@ public class Main {
             }}
 
 
+        }
+
+
+    }
+
+    public static void getStudent(ArrayList<StudentInformation> listofstudents, BufferedReader in) throws IOException {
+        System.out.println("Enter Students unique ID");
+        String input = in.readLine();
+        for (StudentInformation student : listofstudents){
+            if (student.getStudentfirstname().equalsIgnoreCase(input)){
+                System.out.println(student.getStudentfirstname() + " " +
+                        student.getStudentlastname() + " " +
+                        student.getID()+ " " +
+                        student.getGrade());
+            }
         }
     }
 
