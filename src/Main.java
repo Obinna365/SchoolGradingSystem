@@ -22,6 +22,9 @@ public class Main {
         if (input.equalsIgnoreCase("enter")){
             addStudent(studentInformations,in);
         }
+        if (input.equalsIgnoreCase("display")){
+            displayStudent(studentInformations);
+        }
 
         }
 
@@ -66,6 +69,23 @@ public class Main {
         System.out.println(grade);
         return grade;
     }
+
+    public static void displayStudent(ArrayList<StudentInformation> listofstudents){
+        String[] grader = {"A+","A","B","C"};
+        for (String grade : grader){
+        for (StudentInformation student: listofstudents){
+            if(student.getGrade().equalsIgnoreCase(grade)){
+                System.out.println(student.getStudentfirstname() + " " +
+                        student.getStudentlastname() + " " +
+                        student.getID()+ " " +
+                        student.getGrade());
+
+            }}
+
+
+        }
+    }
+
 }
 
 
