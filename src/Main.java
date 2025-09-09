@@ -19,17 +19,16 @@ public class Main {
             System.out.println("::Exiting Grade Ranker::");
             break;
                 }
-        if (input.equalsIgnoreCase("enter")){
+        else if (input.equalsIgnoreCase("enter")){
             addStudent(studentInformations,in);
         }
-        if (input.equalsIgnoreCase("display")){
+         else if (input.equalsIgnoreCase("display")){
             displayStudent(studentInformations);
         }
-        if (input.equalsIgnoreCase("get student")){
+        else if (input.equalsIgnoreCase("get student")){
             getStudent(studentInformations,in);
         }
-        if (!input.equalsIgnoreCase("display")||!input.equalsIgnoreCase("exit")||!input.equalsIgnoreCase("enter")){
-            System.out.println("Command invalid\n" + "Please enter a valid command");
+        else  {System.out.println("Command invalid\n" + "Please enter a valid command");
         }
 
         }
@@ -93,8 +92,7 @@ public class Main {
     }
     public static String gradeValidator(BufferedReader in) throws IOException {
         String input = in.readLine();
-        while (true){
-        if (input.equalsIgnoreCase("a+")|| input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") ||!input.equalsIgnoreCase("c") || input.equalsIgnoreCase("fail")){
+        if (input.equalsIgnoreCase("a+")|| input.equalsIgnoreCase("a") || input.equalsIgnoreCase("b") ||input.equalsIgnoreCase("c") || input.equalsIgnoreCase("fail")){
             return input;} else {
             System.out.println("Please enter a valid grade:\n" +
                     "A+ = highest grade\n" +
@@ -102,11 +100,10 @@ public class Main {
                     "B\n" +
                     "C\n" +
                     "Fail = Lowest");
+            String newinput = getGrade(in);
+            return newinput;
 
         }
-        }
-
-
     }
 
     public static void displayStudent(ArrayList<StudentInformation> listofstudents){
@@ -130,14 +127,17 @@ public class Main {
     public static void getStudent(ArrayList<StudentInformation> listofstudents, BufferedReader in) throws IOException {
         System.out.println("Enter Students unique ID");
         String input = in.readLine();
+        int ID = Integer.parseInt(input);
         for (StudentInformation student : listofstudents){
-            if (student.getStudentfirstname().equalsIgnoreCase(input)){
+            if (student.getID() == ID){
                 System.out.println(student.getStudentfirstname() + " " +
                         student.getStudentlastname() + " " +
                         student.getID()+ " " +
                         student.getGrade());
-            }
-        }
+            } else {
+                System.out.println("Student not found");
+                break;
+        }}
     }
 
 }
