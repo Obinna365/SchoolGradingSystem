@@ -71,17 +71,34 @@ public class Main {
     }
 
     public static int getID(BufferedReader in) throws IOException {
-        try {
-            System.out.println("Enter the students ID name: ");
+        while (true){
+        System.out.println("Enter the students 4 digit ID: ");
         String input = in.readLine();
+        try {
         int ID;
          ID  = Integer.parseInt(input);
             System.out.println(ID);
-            return ID;
+            int NewID = checkIDLength(ID, in);
+            return NewID;
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid Student ID");
             throw new RuntimeException(e);
         }
+    }
+    }
+
+    public static int checkIDLength(int ID, BufferedReader in) throws IOException {
+        String number2string = String.valueOf(ID);
+        String regex = "^\\d{4}$";
+        if (number2string.matches(regex)){
+            System.out.println("Student ID is valid");
+            return ID;
+        } else {
+            System.out.println("Student ID is invalid. Try Again");
+            int newID = getID(in);
+            return newID;
+        }
+
     }
 
     public static String getGrade(BufferedReader in) throws IOException {
@@ -128,13 +145,15 @@ public class Main {
         System.out.println("Enter Students unique ID");
         String input = in.readLine();
         int ID = Integer.parseInt(input);
+        boolean found;
         for (StudentInformation student : listofstudents){
             if (student.getID() == ID){
+                found = true;
                 System.out.println(student.getStudentfirstname() + " " +
                         student.getStudentlastname() + " " +
                         student.getID()+ " " +
                         student.getGrade());
-            } else {
+            } else if (found = false){
                 System.out.println("Student not found");
                 break;
         }}
